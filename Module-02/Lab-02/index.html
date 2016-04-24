@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>MAP672 Module 2 Template</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script> src="https://code.jquery.com/jquery-2.1.4.min.js"</script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #FFC35E;
+            font-family: sans-serif;
+            color: #3d3d3d;
+        }
+        /* CSS command to indicate heading size and margin spacing */
+        
+        h1{
+            font-size: : 1.6em;
+            margin-left: 25px;
+        }
+        h2 {
+            font-size: 1.4em;
+            margin-left:  25px;
+        }
+        p{
+            font-size: 1em;
+            margin: 15px 25px;
+            max-width: : 800px;
+        }
+        a{
+            color: #3e6b93;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        img{
+            margin-left: 250px;
+
+        }
+        
+        /* CSS command to difine style of element "box" as well as each class element of "circle" */
+        
+        #box {
+            width: 200px;
+            height: 200px;
+            background: #3e6b93;
+            margin: 100px;
+        }
+        .circle{
+            width: 100px;
+            height: 100px;
+            background: #bf6864;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 25px;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+<!-- Structured HTML goes within the body tags -->
+    
+    <h1>Module 2</h1>
+    <h2>Pixels of the world</h2>
+    <p>Pickles' excerpt and the influence of the 'Gaze' meaning itself seems to basically suggest the image of the cartographer is projected onto the map that the cartographer creates. This in turn influences the maps viewer. Additionally though, it seems to say that the cartographer believes they are just in oversimplifying the grand scheme of humanity as culture, and separately nature. Finally the God's eye view, which when thinking about this beyond just the basic idea of, "I can literally see the whole world at the same time" on a sheet of paper, and including the 'dimension' of Twitter, social media, and the web the literal view from before becomes extremely interesting, dynamic and omniscient to a whole new level!
+        
+    <br><br>Here is <a href='https://baconipsum.com'>Bacon Ipsum Generator</a></p>
+    
+    <img src="images/world2.png" alt="world map">
+    
+    <!-- Paragraph below contains anchor element with hyperlink to wikipedia article "Lorem ipsum" -->
+    
+    <p>paragraph with link: <a href="https://en.wikipedia.org/wiki/Lorem_ipsum">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl.</p>
+    <ul>
+        <li><a href='http://leafletjs.com/'> Leaflet</a></li>
+        <li><a href='https://www.mapbox.com/'>Mapbox</a></li>
+        <li><a href='https://cartodb.com/'>CartoDB</a></li>
+        <li><a href='https://d3js.org/'>Data Driven Documents</a></li>
+    </ul>
+    
+    <!-- Division element defining unique id as "box" --> 
+    
+    <div id="box"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    
+    <div id="map"></div>
+    
+
+    <script>
+        document.querySelector('h1').innerHTML = 'web mapping is sweet!'
+        var box = document.getElementById('box');
+        box.style.background = '#4d4a9f';
+        
+        var elements = document.getElementsByClassName('circle');
+        
+        for(var i=0; i <= elements.length-1;i++){
+            elements[i].style['border-radius'] = '20%';
+        }
+        
+        // Event listener to change size of "box" when user clicks on it
+        
+        box.addEventListener('click',function(){
+            this.style.width = '400px';
+        });
+        var newListItem= document.createElement('li');
+        newListItem.innerHTML = "list item 4";
+        document.querySelector('ul').appendChild(newListItem);
+        console.log("Hello map")
+        // JavaScript code goes here  
+        
+    </script>
+    
+</body>
+
+</html>
