@@ -50,16 +50,16 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Buffalo Trace, Bulleit, Wild Turkey...?</h1>
+        <h2>MAP672 Lab-03 Spring 2016</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
         <p>Map authored by Tyler Hegwood</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
+        <br>
+        <p>This map displays three cities within the state of Kentucky, coincidentally the locations of two choice distilleries and one not as much. City coordinates provided by Google Maps and population records provided by the US Census Bureau. 
         </p>
     </footer>
 
@@ -86,20 +86,30 @@
         var city1Name = "Lexington";
         var city1Lat = 38.04;
         var city1Lon = -84.50;
-        var city1Pop = "308,428";
+        var city1Pop = 310797;
         var city1Capital = false;
         
         var city2Name = "Frankfort";
         var city2Lat = 38.12;
         var city2Lon = -84.52;
-        var city2Pop = "25,527";
+        var city2Pop = 27557;
         var city2Capital = true;
         
         var city3Name = "Shively";
         var city3Lat = 38.11;
         var city3Lon = -85.48;
-        var city3Pop = "15,643";
+        var city3Pop = 15643;
         var city3Capital = false;
+        
+        var totalPop = [city1Pop + city2Pop + city3Pop];
+        console.log(totalPop);
+        
+        var averagePop = [totalPop/3];
+        console.log("The average population of these cities is: " + averagePop);
+        
+        var cities = ["Lexington", "Frankfort", "Shively"];
+        console.log(cities[2])
+        
         
         
     
