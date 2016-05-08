@@ -78,31 +78,31 @@
 });
         map.addLayer(tiles);
         
-        // begin writing/editing Lab 04 code here
+      
         var cities = ["Rogers", "Wayzata", "Victoria"]
-        var cityCoords = [[45.188015, -93.552529], [44.974194, -93.506891],[44.858473, -93.660137]]
+        var cityCoords = [[45.188015,-93.552529],[44.974194,-93.506891],[44.858473,-93.660137]]
         var cityPops = ["12,393","4,217","8,374"]
         var growthRate = ["44.15%","14.34%","14.01%"]
         var fastestGrowth = [true, false, false]
         
 
-//        for(var ) {
-//            
-//            var popup = "<b>"+/* add code here */+"</b><br>"
-//                            +"<b>population</b>: "+/* add code here */;
-//
-//            if(/* add code here */) {
-//               
-//                popup += "<br>Is the capital city."; 
-//                
-//            } 
-//            
-//            L.marker(/* add code here */).addTo(map)
-//                .bindPopup(popup);
-//        }
+        for(var i = 0;i<cities.length;i++ ) {
+            
+            var popup = "<b>"+ cities[i]+"</b><br>"
+                            +"<b>population</b>: "+cityPops[i]
+            +"<br><b> Growth</b>: "+growthRate[i]
+
+            if(fastestGrowth[i] == true) {
+               
+                popup += "<br>Is the fastest growing city."; 
+                
+            } 
+            
+            L.marker(cityCoords[i]).addTo(map)
+                .bindPopup(popup);
+        }
         
-        // end writing/editing Lab 04 code here
-        
+    
           
     </script>
     
