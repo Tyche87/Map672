@@ -101,11 +101,11 @@
         var city3Pop = 15643;
         var city3Capital = false;
         
-        var totalPop = city1Pop + city2Pop + city3Pop;
+        var totalPop = [city1Pop + city2Pop + city3Pop];
         console.log(totalPop);
         
-        var averagePop = totalPop/3;
-        console.log("The average population of these cities is: " + averagePop.toLocaleString());
+        var averagePop = [totalPop/3];
+        console.log("The average population of these cities is: " + averagePop);
         
         var cities = ["Lexington", "Frankfort", "Shively"];
         console.log(cities[2])
@@ -121,7 +121,7 @@
         
         // CITY1 MARKER CODE HERE
         var city1Popup = "<b>"+city1Name+"</b><br>"
-                        +"<b>population</b>: "+city1Pop.toLocaleString();
+                        +"<b>population</b>: "+city1Pop;
         
         if(city1Capital == true) {
             city1Popup += "<br>Capital of the Commonwealth of Kentucky";   
@@ -132,7 +132,7 @@
         
 //         CITY2 MARKER CODE HERE
         var city2Popup = "<b>"+city2Name+"</b><br>"
-                        +"<b>population</b>: "+city2Pop.toLocaleString();
+                        +"<b>population</b>: "+city2Pop;
         
         if(city2Capital == true) {
             city2Popup += "<br>Capital of the Commonwealth of Kentucky";   
@@ -143,7 +143,7 @@
         
          //CITY3 MARKER CODE HERE
         var city3Popup = "<b>"+city3Name+"</b><br>"
-                        +"<b>population</b>: "+city3Pop.toLocaleString();
+                        +"<b>population</b>: "+city3Pop;
         
         if(city3Capital == true) {
             city3Popup += "<br>Capital of the Commonwealth of Kentucky";   
