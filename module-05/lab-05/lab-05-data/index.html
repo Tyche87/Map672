@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 05 Starter Template</title>
+    <title> Densities of Three MN Cities</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -56,25 +56,23 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Densities of Three Minnesota Cities</h1>
+        <h2>Rogers, Wayzata, Victoria</h2>
     </header>
 
     <div id='map'></div>
     <button id='map-cities'>Map Cities</button>
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl.
-        </p>
+        <p>Map authored by Tyler Hegwood</p>
+        <p>Population and area data retreived from U.S. Census Bureau by way of Wikipedia.com</p>
     </footer>
 
 <script>
     
     // map options
     var options = {
-        center: [20,-20],
-        zoom: 2
+        center: [44.974194,-93.506891],
+        zoom: 8
     }
     
     // creates the Leaflet map
@@ -90,33 +88,57 @@
     // adds these tiles to the map
     map.addLayer(tiles);
     
-//    var cities = // write 3 city names as Strings within an array
-//    var cityCoords = // write a two-dimensional array of the coordinates for each city
-//    var cityPops = // write the populations of the 3 cities as Numbers within an array;
-//    var cityAreas = // write the areas of the 3 cities as Numbers within an array;
+    var cities = ["Rogers", "Wayzata", "Victoria"]
+    var cityCoords = [
+        [45.188015,-93.552529],
+        [44.974194,-93.506891],
+        [44.858473,-93.660137]
+    ];
+    var cityPops = [12393,4217,8374]
+    var cityAreas = [8.158,3.158,9.792]
         
     var button = document.getElementById("map-cities");
     
     button.addEventListener("click", function() {
-         
-        var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
-        
-        console.log(units);
+         do{
+         var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
+         } while (units != "miles" && units != "km")
         
         // call a function named mapCities, and send the units variable as an argument
+        mapCities(units);
         
-    }); // addEventListener callback function ends here
+    }); 
     
     
-    // write a function here named mapCities so that it accepts units as a parameter
+    function mapCities(units){
+        
+        for(var i = 0; i < cities.length;i++){ 
+            
+            var density = calcPopDensity(cityPops[i],cityAreas[i], units);
+            
+            var popup = "<b>" + cities[i] + "</b><br>"+
+                        "<b>Density</b>: " +density.toLocaleString()+" people per square " + units;
+            
+            L.marker(cityCoords[i])
+                .addTo(map)
+                .bindPopup(popup);
+        }
+            
+    }
     
-    
-    // write a function named calcPopDensity here so that it accepts a single city's
-    // population, area, and the value for units determined by the user
+        function calcPopDensity(cityPops, cityAreas, units){
+            if (units == 'miles'){
+               var density = cityPops/cityAreas;
+            }else if(units == 'km'){
+               var density = cityPops/(cityAreas * 2.58998811);
+            }
+            
+            return density;
+             
+        }
 
-    
-    
-    
+
+        
     
 
 </script>
