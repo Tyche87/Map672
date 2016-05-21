@@ -47,10 +47,10 @@
         .kentucky-blue {
             color: #165bb6;
         }
-        .MO{
+        .missouri-green{
             color: green;
         }
-        .FL{
+        .florida-orange{
             color: orange;
         }
         
@@ -86,24 +86,25 @@
         map.addLayer(tiles);
         
         // Begin writing/modifying code for Lab 06 here
+    
         
         var cities = [
              {
-                 name: "Louisville",
+                 cityName: "Louisville",
                  properties: {
                      coordinates: [38.25, -85.7667],
                      population: 756832,
                      state: "KY"
                  }
              }, {
-                name: "St. Louis",
+                cityName: "St. Louis",
                 properties:{
                     coordinates: [38.627370, -90.196117],
                     population: 1003362,
                     state: "MO"
                 }
             }, {
-                name: "Jacksonville",
+                cityName: "Jacksonville",
                 properties: {
                     coordinates: [30.334024, -81.662820],
                     population: 868031,
@@ -115,23 +116,23 @@
         
         for (var i = 0; i < cities.length; i++){
             var props = cities[i].properties;
-            var popup = "<b> I am a popup</b>";
+            var colorClass = buildPopup();
+            var popup = "<div class='"+colorClass+"'><b>"+cities[i].cityName+"</b><br>"+
+                        "<b>Population</b>: "+props.population.toLocaleString()+"<div>";;
             L.marker(props.coordinates).addTo(map)
                 .bindPopup(popup);
-            buildPopup(name, pop, state)
+            buildPopup(cities[i].cityName, props.population, props.state)
         }
         
-        function buildPopup(name, pop, state){
+        function buildPopup(cityName, pop, state){
             if (state == 'KY'){
                 var colorClass = "kentucky-blue";
             }else if (state == 'MO'){
-                var colorClass = "MO";
-            }else if (state = 'FL'){
-                var colorClass = "FL";
-                
+                var colorClass = "missouri-green";
+            }else if (state == 'FL'){
+                var colorClass = "florida-organge";  
             }
-            return "<div> class='"+colorClass+"'><b>"+name+"</b><br>"+
-                        "<b>Population</b>: "+pop.toLocaleString()+"<div>";
+               return colorClass
         }
             
         
