@@ -89,9 +89,31 @@
                      population: 756832,
                      state: "KY"
                  }
-             }    
-        ];
+             }, {
+                name: "St. Louis",
+                properties:{
+                    coordinates: [38.627370, -90.196117],
+                    population: 1003362,
+                    state: "MO"
+                }
+            }, {
+                name: "Jacksonville",
+                properties: {
+                    coordinates: [30.334024, -81.662820],
+                    population: 868031,
+                    state: "FL"
             
+                }
+            }
+    
+        
+        ];
+        
+        for (var i = 0; i < cities.length; i++){
+            console.log(cities[i].properties.population)
+            var props = cities[i].properties
+            }
+     
         
           
     </script>
