@@ -104,16 +104,15 @@
                     state: "FL"
             
                 }
-            }
-    
-        
+            }    
         ];
         
         for (var i = 0; i < cities.length; i++){
-            console.log(cities[i].properties.population)
-            var props = cities[i].properties
-            }
-     
+            var props = cities[i].properties;
+            var popup = "<b> I am a popup</b>";
+            L.marker(props.coordinates).addTo(map)
+                .bindPopup(popup);
+        }
         
           
     </script>
