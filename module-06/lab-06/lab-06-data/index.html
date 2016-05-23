@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 06 Starter Template</title>
+    <title>Lab 06 Methods and Objects, MAP672 spring 2016</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -42,16 +42,16 @@
         }
         p {
             font-size: 1em;
-            color: #001323;
+            color: #black;
         }
         .kentucky-blue {
             color: #165bb6;
         }
-        .missouri-green{
-            color: green;
+        .missouri-red {
+            color: #F44343;
         }
-        .florida-orange{
-            color: orange;
+        .florida-orange {
+            color: #eea10e;
         }
         
     </style>
@@ -59,23 +59,21 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Color Coordinated States</h1>
+        <h2>Lab 06 MAP672 Spring 2016</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
-        </p>
+        <p>Map authored by Tyler Hegwood</p>
+        <p>Population data supplied by U.S. Census Bureau</p>
     </footer>
 
     <script>
 
         var map = L.map('map', {
-            center: [35.251876, -90.034982],
+            center: [35.251876, -84.034982],
             zoom: 5,
         });
        
@@ -84,9 +82,7 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
         map.addLayer(tiles);
-        
-        // Begin writing/modifying code for Lab 06 here
-    
+            
         
         var cities = [
              {
@@ -94,21 +90,24 @@
                  properties: {
                      coordinates: [38.25, -85.7667],
                      population: 756832,
-                     state: "KY"
+                     state: "KY",
+                     logo: 'images/louisville.jpeg'
                  }
              }, {
                 cityName: "St. Louis",
                 properties:{
                     coordinates: [38.627370, -90.196117],
                     population: 1003362,
-                    state: "MO"
+                    state: "MO",
+                    logo: 'images/st_louis.jpeg'
                 }
             }, {
                 cityName: "Jacksonville",
                 properties: {
                     coordinates: [30.334024, -81.662820],
                     population: 868031,
-                    state: "FL"
+                    state: "FL",
+                    logo: 'images/jacksonville.jpeg'
             
                 }
             }    
@@ -116,15 +115,18 @@
         
         for (var i = 0; i < cities.length; i++){
             var props = cities[i].properties;
-            var colorClass = buildPopup();
-            var popup = "<div class='"+colorClass+"'><b>"+cities[i].cityName+"</b><br>"+
-                        "<b>Population</b>: "+props.population.toLocaleString()+"<div>";;
+//            var colorClass = buildPopup(cities[i].cityName, props.population, props.state, props.logo);
+//            var popup = "<div class='"+colorClass+"'><b>"+cities[i].cityName+"</b><br>"+
+//                        "<b>Population</b>: "+props.population.toLocaleString()+"<div>";
+            var popup = buildPopup(cities[i].cityName, props.population, props.state, props.logo);
+            
             L.marker(props.coordinates).addTo(map)
                 .bindPopup(popup);
-            buildPopup(cities[i].cityName, props.population, props.state)
+            
+            buildPopup(cities[i].cityName, props.population, props.state, props.logo);
         }
         
-        function buildPopup(cityName, pop, state){
+        function buildPopup(cityName, pop, state, logo){
             if (state == 'KY'){
                 var colorClass = "kentucky-blue";
             }else if (state == 'MO'){
@@ -132,7 +134,8 @@
             }else if (state == 'FL'){
                 var colorClass = "florida-organge";  
             }
-               return colorClass
+               return "<div class='"+colorClass+"'><b>"+cityName+"</b><br>"+
+                      "<b>Population</b>: "+pop.toLocaleString()+"<div>"+"<br><img class='logo' src='"+ logo +"'>";
         }
             
         
