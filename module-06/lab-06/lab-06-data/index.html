@@ -42,7 +42,7 @@
         }
         p {
             font-size: 1em;
-            color: #black;
+            color: black;  /* no pound symbol when using text words for colors */
         }
         .kentucky-blue {
             color: #165bb6;
@@ -53,7 +53,9 @@
         .florida-orange {
             color: #eea10e;
         }
-        
+        .leaflet-popup-content {
+            width:auto !important;
+        }
     </style>
 </head>
 
@@ -123,19 +125,20 @@
             L.marker(props.coordinates).addTo(map)
                 .bindPopup(popup);
             
-            buildPopup(cities[i].cityName, props.population, props.state, props.logo);
+            // calling this function again isn't doing anything.
         }
         
         function buildPopup(cityName, pop, state, logo){
             if (state == 'KY'){
                 var colorClass = "kentucky-blue";
             }else if (state == 'MO'){
-                var colorClass = "missouri-green";
+                var colorClass = "missouri-red";
             }else if (state == 'FL'){
-                var colorClass = "florida-organge";  
+                var colorClass = "florida-orange";  
             }
+           
                return "<div class='"+colorClass+"'><b>"+cityName+"</b><br>"+
-                      "<b>Population</b>: "+pop.toLocaleString()+"<div>"+"<br><img class='logo' src='"+ logo +"'>";
+                      "<b>Population</b>: "+pop.toLocaleString()+"<div>"+"<br><img class='logo' src='"+ logo +"'></div>";
         }
             
         
