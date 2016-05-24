@@ -55,6 +55,7 @@
 
     <div id='map'></div>
 
+
     <footer>
         <p>Map authored by YOUR NAME</p>
         <p>Additional information about the data and map goes here.</p>
@@ -63,8 +64,111 @@
     </footer>
 
     <script>
+        
+    var options = {
+        center: [40.76618, -111.8977124],
+        zoom: 5,
+//        minZoom: 4,
+//        maxZoom: 7, 
+//        dragging: false, 
+//      zoomComtrol: false
+    }    
+        
+    var map = L.map('map', options);
+    map.setView(options.center, 14)
+    map.on('click', function(e){
+        console.log(e.latlng);
+    });
+    
+    var center = map.getCenter('map');
+    console.log(center.lat, center.lng);
+    var zoom = map.getZoom();
+    console.log(zoom);
+    var bounds = map.getBounds();
+    console.log(bounds);
+        
+    var bottomLeft = bounds.getSouthWest();
+    console.log(bottomLeft.lat, bottomLeft.lng); 
+    
+    L.marker([38.0297, -84.4947]).addTo(map);
+    
+//    var redIguanaLocation = L.latLng(40.7718, -111.9124);
+//    var redIguanaCircle = L.circle(redIguanaLocation,400);
+//        redIguanaCircle.addTo(map);
+//    redIguanaCircle.setStyle({
+//        color: "#d72b1e",
+//        weight: 5, 
+//        fillColor: "#d72b1e",
+//        fillOpacity: .4
+//    })    
+//        redIguanaCircle.bindPopup("<b>Red Iguana</b><br>Best Mexican food in Salt Lake City!");
+//        draggable: true,
+//        opacity: .4)
+        
+    var betosLocation = L.latLng(40.759758, -111.879091);
+    var betosCircle = L.circle(betosLocation, 600);
+        betosCircle.addTo(map);
+        betosCircle.bindPopup("<b>Betos</b><br>Because... college.")
+        
+    var cafeRioLocation = L.latLng(40.760238, -111.875330);
+    var cafeRioCirlce = L.circle(cafeRioLocation, 200);
+        cafeRioCirlce.addTo(map);
+        cafeRioCirlce.bindPopup("<b>Cafe Rio!</b>")
+        cafeRioCirlce.setStyle({
+            color: '#25DC25',
+            fillOpacity: .8
+        })
+        
+    var iguanaRestuarants = L.layerGroup();
+    var redIguanaOptions = {
+        color: 'red',
+        fillColor: 'red'
+    };
+    var blueIguanaOptions = {
+        color: '#03f',
+        fillColor: '#03f'
+    };
+        
+    var redIguana = L.circle([40.7718, -111.9124], 400);
+    redIguana.color= 'red';
+    redIguana.addTo(iguanaRestuarants);
+    var blueIguana = L.circle([40.7657, -111.8930], 300);
+    blueIguana.color = 'blue';
+    blueIguana.addTo(iguanaRestuarants);
+    iguanaRestuarants.addTo(map);
+        
+    iguanaRestuarants.eachLayer(function(layer){
+        layer.on('mouseover',function(e){
+            e.target.setStyle({
+                color: 'yellow',
+                fillColor: 'yellow'
+            });
+        });
+        layer.on('mouseout', function(e){
+            if(e.target.color == 'red'){
+                e.target.setStyle(redIguanaOptions);
+            } else if (e.target.color == 'blue'){
+                e.target.setStyle(blueIguanaOptions);
+            }
 
-      // build your Leaflet map here!
+        });
+    });
+                
+        
+        
+
+//    redIguanaMarker.addTo(map);
+//    redIguanaMarker.on('drag',function(e){
+//    console.log(e.target.getLatLng());
+    
+        
+    var tiles = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+    });    
+        map.addLayer(tiles);    
+    
+
                   
     </script>
     
