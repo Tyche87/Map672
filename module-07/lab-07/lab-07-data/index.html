@@ -81,8 +81,14 @@
 //    console.log(distanceLocation);
     var distanceMarker = L.marker(distanceLocation, {
         draggable: true});
-        distanceMarker.addTo(map);   
+        distanceMarker.addTo(map);
+        
+    var distance = redIguana.distanceTo(distanceLocation);   
+        console.log(distance);
     });
+                
+//    var distance = redIguana.distanceTo(distanceMarker);   
+//        console.log(distance);
         
 //    console.log(distanceMarker)});
     
@@ -98,9 +104,7 @@
 //    var distanceMarker = L.latLng(distanceLocation);
     
     
-         
-        
-//    distanceMarker.addTo(map);   
+          
                 
     var redIguana = L.latLng(40.7718,-111.9124);
         
@@ -110,6 +114,7 @@
             iconSize: [40, 36]
         })
     }).addTo(map);
+        
         
 //    distanceMarker.addTo(map);
 //    distanceMarker.on('drag',function(e){
@@ -122,7 +127,6 @@
         
 //    L.marker(distanceMarker).addTo(map);
         
-//    var distance = redIguana.distanceTo(distanceMarker);
         
     var tiles = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
 	   maxZoom: 19,
