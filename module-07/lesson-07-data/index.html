@@ -126,15 +126,20 @@
         color: '#03f',
         fillColor: '#03f'
     };
-        
+    //Define redIguana circle marker, coordinates and style 
     var redIguana = L.circle([40.7718, -111.9124], 400);
     redIguana.color= 'red';
+    //Add the redIguana marker to the layer - igunanaRestaurants    
     redIguana.addTo(iguanaRestuarants);
+    //Define blueIguana circle marker, cooridinates and styles   
     var blueIguana = L.circle([40.7657, -111.8930], 300);
     blueIguana.color = 'blue';
+    //Add the blueUguana circle marker to layer - iguanaRestaurants    
     blueIguana.addTo(iguanaRestuarants);
+    //Add layer iguanaRestaurants to 'map'     
     iguanaRestuarants.addTo(map);
-        
+    
+    //Create event for iguanaRestaurants layer to fill yellow with 'mouseover'    
     iguanaRestuarants.eachLayer(function(layer){
         layer.on('mouseover',function(e){
             e.target.setStyle({
@@ -142,6 +147,7 @@
                 fillColor: 'yellow'
             });
         });
+        //Create event for fill color to revert to original style when no longer over circle marker
         layer.on('mouseout', function(e){
             if(e.target.color == 'red'){
                 e.target.setStyle(redIguanaOptions);
@@ -155,9 +161,7 @@
         
         
 
-//    redIguanaMarker.addTo(map);
-//    redIguanaMarker.on('drag',function(e){
-//    console.log(e.target.getLatLng());
+
     
         
     var tiles = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
