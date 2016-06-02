@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 07 MAP672 Spring 2016</title>
+    <title>Red Iguana Distance</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -74,34 +74,7 @@
     }
     
     var map = L.map('map', options);
-    //Create map marker and define latLng from click event    
-    map.on('click', function(e){
-    var distanceLocation = L.latLng([e.latlng.lat, e.latlng.lng]);
-//       console.log(distanceLocation);
-    var distanceMarker = L.marker(distanceLocation, {
-        draggable: true
-    });
-     //Calculate new distance of marker on when user releases drag of marker
-    distanceMarker.on('dragend', function(e){
-    var distanceLocation2 = L.latLng(e.target.getLatLng());
-//        console.log(distanceLocation2)
-    var distance2 = redIguana.distanceTo(distanceLocation2);
-//        console.log(distance2)
-    distanceMarker.setPopupContent((distance2/1000).toFixed(3) + " km to <b> Red Iguana</b>").openPopup(popup);
-
-    });
         
-    distanceMarker.addTo(map);
-    
-    //Calculate distance from marker location to Red Iguana location in meters    
-    var distance = redIguana.distanceTo(distanceLocation);
-        
-    //Create popup to dislplay distance in km     
-    var popup = distanceMarker.bindPopup((distance/1000).toFixed(3)+ " km to <b> Red Iguana</b>");
-
-
- });        
-
     //Red Iguana icon marker location                
     var redIguana = L.latLng(40.7718,-111.9124);
         
@@ -112,24 +85,47 @@
         })
     }).addTo(map);
 
-
-        
-        
+    
     var tiles = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
 	   maxZoom: 19,
 	   attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}); 
+    }); 
         
     map.addLayer(tiles)
     
     
-    
-    
-    
-       
+    //Create map marker and define latLng from click event    
+    map.on('click', function(e){
         
+        var distanceLocation = e.latlng;
 
-                  
+        var distanceMarker = L.marker(distanceLocation, {
+            draggable: true
+        });
+        
+        
+        distanceMarker.addTo(map);
+
+        //Calculate distance from marker location to Red Iguana location in meters    
+        var distance = redIguana.distanceTo(distanceLocation);
+
+        //Create popup to dislplay distance in km     
+        var popup = distanceMarker.bindPopup((distance/1000).toFixed(3)+ " km to <b> Red Iguana</b>").openPopup();
+
+         //Calculate new distance of marker on when user releases drag of marker
+        distanceMarker.on('dragend', function(e){
+            var distanceLocation2 = L.latLng(e.target.getLatLng());
+        //        console.log(distanceLocation2)
+            var distance2 = redIguana.distanceTo(distanceLocation2);
+        //        console.log(distance2)
+            distanceMarker.setPopupContent((distance2/1000).toFixed(3) + " km to <b> Red Iguana</b>").openPopup();
+
+        });
+
+
+
+    });        
+                
     </script>
     
 </body>
