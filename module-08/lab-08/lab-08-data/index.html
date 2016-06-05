@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 08 Starter</title>
+    <title>Lab 08 MAP672 Spring 2016</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -16,9 +16,10 @@
         body {
             margin: 0;
             padding: 0;
-            background: whitesmoke;
+            background-image: url("images/city2.jpg");
+            background-attachment: scroll;
+            background-position: center;
             font-family: Lato, sans-serif;
-            color: #0D0000;
         }
         header {
             padding: 6px 10%;
@@ -26,16 +27,21 @@
         h1 {
             display: inline-block;
             margin-right: 20px;
-            color: #001323;
+            color: #FFFFFF;
+            text-align: center;
         }
         h2 {
             display: inline-block;
-            color: #001323;
+            color: #FFFFFF;
+            text-align: center;
         }
         #map {
             width: 80%;
             height: 540px;
             margin: 10px auto;
+            border: 1px;
+            border-style: solid;
+            border-color: #FFFFFF
         }
         footer {
             padding: 6px 10%;
@@ -43,42 +49,50 @@
         }
         p {
             font-size: 1em;
-            color: #001323;
+            color: #FFFFFF;
         }
+
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>US Nuclear Power Plant Locations and Capacities</h1><br>
+        <h2>Plant capacity designated by marker area</h2>
     </header>
 
     <div id='map'></div>
 
+
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
+        <p>Map authored by Tyler Hegwood</p>
+        <p>The above map illustrates the location as well as energy output capacities in megawatts. The marker size is dicatated by the plant's 
+        capacity for production. Data is sourced from the U.S. Energy Information Administration (eia.gov). Background image is licensed under Creative Commons Zero.</p>
     </footer>
 
     <script src="power-plants.js"></script>
     <script>
 
-      var map = L.map('map', {
-          center: [36,-94],
-          zoom: 4,
+    var map = L.map('map', {
+        center: [36,-97],
+        zoom: 4,
       });
+        
+    var tiles = L.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}', {
+	    attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.',
+	    bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
+	    minZoom: 4,
+	    maxZoom: 8,
+	    format: 'jpg',
+	    time: '',
+	    tilematrixset: 'GoogleMapsCompatible_Level'
+    }); 
       
-      var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-          subdomains: 'abcd',
-          maxZoom: 19
-      });  
-      
-      tiles.addTo(map);
+    tiles.addTo(map);
         
     plants.features.sort(function(a,b){
         return b.properties.capacity_mw - a.properties.capacity_mw;
+        
     });    
       
     L.geoJson(plants, {
@@ -87,20 +101,20 @@
                  color: '#04B2DB',
                  weight: 1,
                  fillColor: '#103DE1',
-                 fillOpacity: .6,
+                 fillOpacity: .5,
                  radius: getRadius(feature.properties.capacity_mw)
               });
           },
           filter : function(feature, layer){
-              if(feature.properties.fuel_source['Natural Gas']){
+              if(feature.properties.fuel_source['Nuclear']){
                   return feature
               };
           },
           onEachFeature : function(feature, layer){
-//            console.log(layer);
+           //console.log(layer);
               layer.on('mouseover', function(){
                   layer.setStyle({
-                      fillColor: '#00E73D'
+                      fillColor: '#04B2DB'
                   });
               });
               layer.on('mouseout', function(){
@@ -108,15 +122,27 @@
                       fillColor: '#103DE1'
                   });
               });
-              layer.bindPopup(popUp);
-          },
+              var popup = buildPopup(feature.properties.plant_name, feature.properties.capacity_mw, feature.properties.fuel_source)
+              layer.bindPopup(popup);
+              
+        function buildPopup(name, capacity, fuel){
+           // if()
+              return "<b>"+name+"</b><br>"
+                     +capacity.toLocaleString()+ " MW"
+                    
+    };
+          }
+
+        
+        
     }).addTo(map);
     
     function getRadius(area){
         var radius = Math.sqrt(area/Math.PI);
-        return radius *.6;
-        
+        return radius *.6   
     };
+        
+    
     
    
         
