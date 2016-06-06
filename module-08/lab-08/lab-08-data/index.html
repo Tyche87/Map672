@@ -109,46 +109,52 @@
               if(feature.properties.fuel_source['Nuclear']){
                   return feature
               };
+              //console.log(feature);
           },
           onEachFeature : function(feature, layer){
-           //console.log(layer);
               layer.on('mouseover', function(){
                   layer.setStyle({
-                      fillColor: '#04B2DB'
+                      fillcolor: '#04B2DB',
+                      color: '#04B2DB',
+                      weight: 2,
                   });
               });
               layer.on('mouseout', function(){
                   layer.setStyle({
-                      fillColor: '#103DE1'
+                      fillColor: '#103DE1',
+                      color: '#04B2DB',
+                      weight: 1,
                   });
               });
-              var popup = buildPopup(feature.properties.plant_name, feature.properties.capacity_mw, feature.properties.fuel_source)
+             
+              var name = feature.properties.plant_name;
+              var capacity = feature.properties.capacity_mw.toLocaleString();
+              var fuel = feature.properties.fuel_source
+              
+//              function fuelType(fuel){
+//                  if(fuel !='Nuclear'){
+//                      var fuel2 = fuel
+//                  }
+//                  return 
+//        
+//              }
+//              console.log(fuel);
+          
+              var popup = ("<b>"+name+"</b><br>"
+              +capacity+ " MW" + "<br>")
+//              +fuel+ " MW")
+              
               layer.bindPopup(popup);
               
-        function buildPopup(name, capacity, fuel){
-           // if()
-              return "<b>"+name+"</b><br>"
-                     +capacity.toLocaleString()+ " MW"
-                    
-    };
+              
           }
-
-        
-        
     }).addTo(map);
-    
+             
+        
     function getRadius(area){
         var radius = Math.sqrt(area/Math.PI);
         return radius *.6   
-    };
-        
-    
-    
-   
-        
-                    
-    
-
+    }
                   
     </script>
     
