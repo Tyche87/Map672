@@ -169,17 +169,14 @@
         
                   var props = layer.feature.properties;
                   var content = "<b>" + layer.feature.properties.plant_name + "</b><br>";
-                                
-                      
+                                  
                   content += "<b>" + layerInfo[l].source +"</b>: " +
-//                  for(var source in layerInfo[l].source){
-//                      content += '<b>'+source+' MW <br>';
+                      
                   props.fuel_source[layerInfo[l].source].toLocaleString() + " MW <br>";
                   
                   content += "I am <b>" +distance.toLocaleString()+
                                  "km</b><br> from the click point."
                   layer.bindPopup(content);
-
               }
           });
           }
